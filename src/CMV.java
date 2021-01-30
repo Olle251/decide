@@ -32,6 +32,24 @@ public class CMV {
         return null;
     }
 
+    public boolean lic0() {
+        double dist;
+        Point2D.Double point1;
+        Point2D.Double point2;
+        double length1 = parameters.getLength1();
+        for (int i = 0 ; i < (numPoints - 1) ; i++) {
+            point1 = points.get(i);
+            point2 = points.get(i+1);
+
+            dist = Math.sqrt(Math.pow((point2.getX() - point1.getX()),2) +
+                    Math.pow((point2.getY() - point1.getY()), 2));
+            if (dist > length1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public boolean lic1(){
         if (numPoints < 3) return false;
