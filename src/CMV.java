@@ -10,13 +10,13 @@ public class CMV {
     private boolean[] vector;
     private List<Pair<Double,Double>> points;
     private int numpoints;
-    //private Parameters parameters;
+    private Parameters parameters;
     //TODO add parameters to constructer
-    public CMV (List<Pair<Double,Double>> points , int numpoints){
+    public CMV (List<Pair<Double,Double>> points , int numpoints, Parameters parameters){
 
-        points = points;
-        numpoints = numpoints;
-        //parameters = parameters;
+        this.points = points;
+        this.numpoints = numpoints;
+        this.parameters = parameters;
 
         vector = createCMV();
     }
