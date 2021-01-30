@@ -33,4 +33,16 @@ class CMVTest {
     @Test
     void createCMV() {
     }
+
+    @Test
+    void lic2TestTrue() {
+        parameters.setEpsilon(0.0);
+        assertTrue(cmv.lic2());
+    }
+    @Test
+    void lic2TestFalse() {
+        parameters.setEpsilon(Math.PI);
+        assertFalse(cmv.lic2());
+    }
+
 }
