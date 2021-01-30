@@ -39,9 +39,22 @@ class CMVTest {
         parameters.setRadius1(100);
         assertFalse(cmv.lic1());
     }
+
     @Test
     void lic1TestTrue() {
         parameters.setRadius1(1);
         assertTrue(cmv.lic1());
     }
+
+    @Test
+    void lic2TestTrue() {
+        parameters.setEpsilon(0.0);
+        assertTrue(cmv.lic2());
+    }
+    @Test
+    void lic2TestFalse() {
+        parameters.setEpsilon(Math.PI);
+        assertFalse(cmv.lic2());
+    }
+
 }
