@@ -3,19 +3,19 @@
 
  */
 
-import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.*;
 import java.util.List;
 
 public class CMV {
     private boolean[] vector;
-    private List<Point<Double,Double>> points;
+    private List<Point2D.Double> points;
     private int numPoints;
     private Parameters parameters;
 
 
     //TODO add parameters to constructer
-    public CMV (List<Point<Double, Double>> points , int numpoints, Parameters parameters){
+    public CMV (List<Point2D.Double> points , int numPoints, Parameters parameters){
 
         this.points = points;
         this.numPoints = numPoints;
@@ -38,18 +38,12 @@ public class CMV {
         double radius1 = parameters.RADIUS1;
 
         for (int i = 0; i < numPoints-2; i++) {
-           double distance1 = Math.sqrt(Math.pow(points.get(i).getKey() - points.get(i+1).getKey(), 2) + Math.pow(points.get(i).getValue() - points.get(i+1).getValue(), 2));
-           double distance2 = Math.sqrt(Math.pow(points.get(i).getKey() - points.get(i+2).getKey(), 2) + Math.pow(points.get(i).getValue() - points.get(i+2).getValue(), 2));
-           double distance3 = Math.sqrt(Math.pow(points.get(i+1).getKey() - points.get(i+2).getKey(), 2) + Math.pow(points.get(i+1).getValue() - points.get(i+2).getValue(), 2));
+           double distance1 = Math.sqrt(Math.pow(points.get(i).getX() - points.get(i+1).getX(), 2) + Math.pow(points.get(i).getY() - points.get(i+1).getY(), 2));
+           double distance2 = Math.sqrt(Math.pow(points.get(i).getX() - points.get(i+2).getX(), 2) + Math.pow(points.get(i).getY() - points.get(i+2).getY(), 2));
+           double distance3 = Math.sqrt(Math.pow(points.get(i+1).getX() - points.get(i+2).getX(), 2) + Math.pow(points.get(i+1).getY() - points.get(i+2).getY(), 2));
 
            if (distance3 > radius1*2 || distance1 > radius1*2 || distance2 > radius1*2) return true;
         }
-        
-        Pair<Double, Double> p1 = points.get(0);
-        Pair<Double, Double> p2 = points.get(1);
-        List a = new ArrayList<>();
-        a.add(p2.getKey() - p1.getKey());
-
         return false;
     }
 
@@ -57,9 +51,9 @@ public class CMV {
     //LIC2 Checks if there exists a angle that satisfies the condition between three consecutive coordinates in points, p1,p2,p3, p2 always being vertex.
     public boolean lic2 () {
         for (int i = 2; i < numPoints; i++) {
-            Point<Double,Double> p3 = points.get(i);
-            Point<Double,Double> p2 = points.get(i-1);
-            Point<Double,Double> p1 = points.get(i-2);
+            Point2D.Double p3 = points.get(i);
+            Point2D.Double p2 = points.get(i-1);
+            Point2D.Double p1 = points.get(i-2);
 
             if (!(p1.equals(p2) | p3.equals(p2))){
 
