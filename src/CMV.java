@@ -33,7 +33,7 @@ public class CMV {
     }
 
 
-    public boolean checkLIC1(){
+    public boolean lic1(){
         if (numPoints < 3) return false;
         double radius1 = parameters.RADIUS1;
 

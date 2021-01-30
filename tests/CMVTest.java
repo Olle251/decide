@@ -33,4 +33,15 @@ class CMVTest {
     @Test
     void createCMV() {
     }
+
+    @Test
+    void lic1TestFalse() {
+        parameters.setRadius1(100);
+        assertFalse(cmv.lic1());
+    }
+    @Test
+    void lic1TestTrue() {
+        parameters.setRadius1(1);
+        assertTrue(cmv.lic1());
+    }
 }
