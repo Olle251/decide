@@ -30,14 +30,18 @@ public class Utils {
     }
 
     /**
-     * Takes two two-dimensional points and returns the vector between them as a 2D point.
-     * @param start the starting point of the vector
-     * @param end the end point of the vector
-     * @return a Point2D.Double representing the vector between the points
+     * Returns the area of a triangle spanned by three points in 2D space.
+     * @param p1 a Point2D.Double
+     * @param p2 a Point2D.Double
+     * @param p3 a Point2D.Double
+     * @return the area of the triangle connected by the points
      */
-    public static Point2D.Double calculate2DVector(Point2D.Double start, Point2D.Double end) {
-        Point2D.Double vector = new Point2D.Double(end.getX() - start.getX(), end.getY() - start.getY());
-        return vector;
-    }
+    public static double calculateTriangleArea(Point2D.Double p1, Point2D.Double p2, Point2D.Double p3) {
 
+        double intermediateResult1 = p1.getX()*(p2.getY() - p3.getY());
+        double intermediateResult2 = p2.getX()*(p3.getY() - p1.getY());
+        double intermediateResult3 = p3.getX()*(p1.getY() - p2.getY());
+
+        return Math.abs((intermediateResult1 + intermediateResult2 + intermediateResult3)/2.0);
+    }
 }

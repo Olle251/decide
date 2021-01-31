@@ -85,6 +85,23 @@ class CMVTest {
         assertFalse(cmv.lic2());
     }
 
+    /**
+     * Checks if lic3 returns true when there are 3 consecutive vertex points that form a triangle with Area greater than 2.0.
+     */
+    @Test
+    void lic3TestTrue() {
+        parameters.setArea1(2.0);
+        assertTrue(cmv.lic3());
+    }
+
+    /**
+     * Checks if lic3 returns false when all points are on one line and the area is positive.
+     */
+    @Test
+    void lic3TestFalse() {
+        parameters.setArea1(0.1);
+        assertFalse(cmv2.lic3());
+    }
     /** Checks if the method lic5 returns true when there exists a pair of consecutive points (p1, p2) where
      * p1's X-coordinate > p2's X-coordinate.
      */
