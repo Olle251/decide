@@ -28,4 +28,16 @@ public class Utils {
 
         return angle;
     }
+
+    /**
+     * Takes two two-dimensional points and returns the vector between them as a 2D point.
+     * @param start the starting point of the vector
+     * @param end the end point of the vector
+     * @return a Point2D.Double representing the vector between the points
+     */
+    public static Point2D.Double calculate2DVector(Point2D.Double start, Point2D.Double end) {
+        Point2D.Double vector = new Point2D.Double(end.getX() - start.getX(), end.getY() - start.getY());
+        return vector;
+    }
+
 }

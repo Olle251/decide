@@ -33,4 +33,17 @@ class UtilsTest {
 
         assertEquals(Utils.calculateAngle(a, b, c), (3.0*Math.PI)/4.0);
     }
+
+    /**
+     * Checks that the correct vector connecting two points.
+     */
+    @Test
+    void calculate2DVectorTest() {
+        Point2D.Double a = new Point2D.Double(1.0, -2.0);
+        Point2D.Double b = new Point2D.Double(4.0, 2.0);
+        Point2D.Double check = new Point2D.Double(3.0, 4.0);
+
+        assertEquals(check, Utils.calculate2DVector(a,b));
+
+    }
 }
