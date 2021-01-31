@@ -96,6 +96,10 @@ public class CMV {
         return false;
     }
 
+    /** Checks if there exists at least one set of two data points separated by exactly K_PTS consecutive intervening
+     * points that are a distance greater than the length, LENGTH1, apart.
+     * @return boolean that says if lic7 holds or not
+     */
     public boolean lic7() {
         double dist;
         Point2D.Double point1;
