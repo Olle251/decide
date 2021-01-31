@@ -88,4 +88,17 @@ public class CMV {
     return false;
     }
 
+    public boolean lic5 () {
+        Point2D.Double p1;
+        Point2D.Double p2;
+        for (int i = 0; i < numPoints-1; i++) {
+            p1 = points.get(i);
+            p2 = points.get(i+1);
+            if (p2.getX() < p1.getX()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
