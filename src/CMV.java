@@ -41,8 +41,7 @@ public class CMV {
             point1 = points.get(i);
             point2 = points.get(i+1);
 
-            dist = Math.sqrt(Math.pow((point2.getX() - point1.getX()),2) +
-                    Math.pow((point2.getY() - point1.getY()), 2));
+            dist = Utils.calculateDistance(point1, point2);
             if (dist > length1) {
                 return true;
             }
