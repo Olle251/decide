@@ -74,11 +74,7 @@ public class CMV {
             Point2D.Double p1 = points.get(i-2);
 
             if (!(p1.equals(p2) | p3.equals(p2))){
-
-                double[] a = {p2.getX() - p1.getX(), p2.getY() - p1.getY()};
-                double[] b = {p2.getX() - p3.getX(), p2.getY() - p3.getY()};
-
-                double angle = Math.acos((a[0] * b[0] + a[1] * b[1]) / (Math.sqrt(a[0] * a[0] + a[1] * a[1]) * Math.sqrt(b[0] * b[0] + b[1] * b[1])));
+            double angle = Utils.calculateAngle(p1, p2, p3);
                 if (angle < (Math.PI - parameters.getEpsilon()) || angle > Math.PI + parameters.getEpsilon()) {
                     return true;
                 }
