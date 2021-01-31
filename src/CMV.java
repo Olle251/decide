@@ -97,4 +97,22 @@ public class CMV {
         return false;
     }
 
+    public boolean lic7() {
+        double dist;
+        Point2D.Double point1;
+        Point2D.Double point2;
+        double length1 = parameters.getLength1();
+        int K_PTS = parameters.getK_PTS();
+        if (numPoints < 3) { return false; }
+        for (int i = 0 ; i < (numPoints - (1+K_PTS)) ; i++) {
+            point1 = points.get(i);
+            point2 = points.get(i+1+K_PTS);
+            dist = Utils.calculateDistance(point1, point2);
+            if (dist > length1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
