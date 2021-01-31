@@ -106,7 +106,7 @@ class CMVTest {
     void lic7False() {
         parameters.setK_PTS(1);
         parameters.setLength1(5.0);
-        assertFalse(cmv2.lic7());
+        assertFalse(cmvThreeClosePointsAscending.lic7());
     }
 
     /** Checks if lic7 returns true when length1 is less than at least one set of two points separated by exactly
@@ -116,6 +116,6 @@ class CMVTest {
     void lic7True() {
         parameters.setK_PTS(1);
         parameters.setLength1(3.0);
-        assertTrue(cmv2.lic7());
+        assertTrue(cmvThreeClosePointsAscending.lic7());
     }
 }
