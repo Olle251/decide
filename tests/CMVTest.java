@@ -166,6 +166,29 @@ class CMVTest {
     }
 
     /**
+     * Sets epsilon to PI to check for an angle smaller than 0 degrees or larger than 360 degrees. Should return false.
+     */
+    @Test
+    void lic9False() {
+        parameters.setC_PTS(1);
+        parameters.setD_PTS(2);
+        parameters.setEpsilon(Math.PI);
+        assertFalse(cmvEightDistantPoints.lic9());
+    }
+
+    /**
+     * Sets epsilon to 0, which means every angle should return true unless all points are in a line or there are input issues.
+     */
+    @Test
+    void lic9True() {
+        parameters.setC_PTS(1);
+        parameters.setD_PTS(2);
+        parameters.setEpsilon(0.0);
+        assertTrue(cmvEightDistantPoints.lic9());
+    }
+
+
+    /**
      * Sets area1 to a large value which no points in the standard test cases can cover.
      */
 
