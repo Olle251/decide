@@ -377,4 +377,35 @@ public class CMV {
 
     }
 
+    /**
+     * Checks if there are at least two sets of 3 data points separated by E_PTS and F_PTS consecutive points respectively.
+     * These two sets contain 3 data points which form at least one triangle larger than AREA1 and smaller than AREA2 respectively.
+     * As additional requirements, the number of data points has to be at least 5, the E_PTS and F_PTS parameters have to be larger than 1
+     * and E_PTS+F_PTS have to be at least as large as the number of points - 3. AREA2 should be non-negative.
+     * @return true/false
+     */
+    public boolean lic14() {
+        if(parameters.getArea2() < 0) return false;
+        if (!lic10()) return false;
+        Point2D.Double p1;
+        Point2D.Double p2;
+        Point2D.Double p3;
+        int e_pts = parameters.E_PTS;
+        int f_pts = parameters.F_PTS;
+        double area2 = parameters.getArea2();
+
+        for (int i = 0; i < numPoints-(2+e_pts+f_pts); i++) {
+            p1 = points.get(i);
+            p2 = points.get(i+1+e_pts);
+            p3 = points.get(i+2+e_pts+f_pts);
+
+            double area = Utils.calculateTriangleArea(p1, p2, p3);
+            //the area could be zero if the points lies in a line
+            if (area < area2){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

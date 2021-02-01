@@ -276,4 +276,26 @@ class CMVTest {
         parameters.setRadius2(500);
         assertTrue(cmvEightDistantPoints.lic13());
     }
+    /**
+     * Sets area1 to a small value which the standard test case should evaluate to false
+     */
+    @Test
+    void lic14False() {
+        parameters.setE_PTS(1);
+        parameters.setF_PTS(2);
+        parameters.setArea1(1);
+        parameters.setArea2(1);
+        assertFalse(cmvEightDistantPoints.lic14());
+    }
+    /**
+     * Sets area2 to a large value which the standard test case should evaluate to true.
+     */
+    @Test
+    void lic14True() {
+        parameters.setE_PTS(1);
+        parameters.setF_PTS(2);
+        parameters.setArea1(1);  //From previous tests this evaluates true for lic 10, which is the first part of the lic14 method.
+        parameters.setArea2(10000);
+        assertTrue(cmvEightDistantPoints.lic14());
+    }
 }
