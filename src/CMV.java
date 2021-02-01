@@ -83,6 +83,27 @@ public class CMV {
     return false;
     }
 
+    /**
+     * Checks if there exists at least 3 consecutive data points that form the vertices of a triangle with area greater than parameters.AREA1.
+     * @return true or false.
+     */
+    public boolean lic3 () {
+        if (numPoints < 3) {
+            return false;
+        }
+        for (int i = 2; i < numPoints; i++) {
+            Point2D.Double p3 = points.get(i);
+            Point2D.Double p2 = points.get(i-1);
+            Point2D.Double p1 = points.get(i-2);
+
+            if (Utils.calculateTriangleArea(p1, p2, p3) > parameters.getArea1()){
+                return true;
+            };
+        }
+        return false;
+    }
+
+
     public boolean lic5 () {
         Point2D.Double p1;
         Point2D.Double p2;
