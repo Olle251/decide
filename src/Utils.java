@@ -4,6 +4,13 @@ import java.util.Arrays;
 
 
 public class Utils {
+
+    /**
+     * Returns a distance between two two-dimensional points
+     * @param lhs the first point
+     * @param rhs the second point
+     * @return the distance
+     */
     public static double calculateDistance(Point2D.Double lhs, Point2D.Double rhs) {
         return Math.sqrt(Math.pow(lhs.getX() - rhs.getX(), 2) + Math.pow(lhs.getY() - rhs.getY(), 2));
     }
@@ -27,6 +34,18 @@ public class Utils {
 
 
         return angle;
+    }
+
+    /**
+     * Returns a radius of the circumCircle given three two-dimensional points
+     * @param a the first distance
+     * @param b the second distance
+     * @param c the third distance
+     * @return   the radius
+     */
+    public static double calculateCircumRadius(double a, double b, double c) {
+        double radius = (a * b * c) / Math.sqrt((a + b + c) * Math.abs(b + c - a) * Math.abs(c + a - b) * Math.abs(a + b - c));
+        return radius;
     }
 
     /**

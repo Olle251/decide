@@ -70,7 +70,7 @@ class CMVTest {
 
     @Test
     void lic1TestFalse() {
-        parameters.setRadius1(100);
+        parameters.setRadius1(1000);
         assertFalse(cmvEightDistantPoints.lic1());
     }
 
@@ -141,6 +141,21 @@ class CMVTest {
         parameters.setK_PTS(1);
         parameters.setLength1(3.0);
         assertTrue(cmvThreeClosePointsAscending.lic7());
+    }
+
+    @Test
+    void lic8False() {
+        parameters.setA_PTS(1);
+        parameters.setB_PTS(2);
+        parameters.setRadius1(500);
+        assertFalse(cmvEightDistantPoints.lic8());
+    }
+    @Test
+    void lic8True() {
+        parameters.setA_PTS(1);
+        parameters.setB_PTS(2);
+        parameters.setRadius1(0.1);
+        assertTrue(cmvEightDistantPoints.lic8());
     }
 
     /**
