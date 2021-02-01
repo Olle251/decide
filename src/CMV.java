@@ -91,6 +91,27 @@ public class CMV {
     return false;
     }
 
+    /**
+     * Checks if there exists at least 3 consecutive data points that form the vertices of a triangle with area greater than parameters.AREA1.
+     * @return true or false.
+     */
+    public boolean lic3 () {
+        if (numPoints < 3) {
+            return false;
+        }
+        for (int i = 2; i < numPoints; i++) {
+            Point2D.Double p3 = points.get(i);
+            Point2D.Double p2 = points.get(i-1);
+            Point2D.Double p1 = points.get(i-2);
+
+            if (Utils.calculateTriangleArea(p1, p2, p3) > parameters.getArea1()){
+                return true;
+            };
+        }
+        return false;
+    }
+
+
     public boolean lic5 () {
         Point2D.Double p1;
         Point2D.Double p2;
@@ -98,6 +119,28 @@ public class CMV {
             p1 = points.get(i);
             p2 = points.get(i+1);
             if (p2.getX() < p1.getX()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Checks if there exists at least one set of two data points separated by exactly K_PTS consecutive intervening
+     * points that are a distance greater than the length, LENGTH1, apart.
+     * @return boolean that says if lic7 holds or not
+     */
+    public boolean lic7() {
+        double dist;
+        Point2D.Double point1;
+        Point2D.Double point2;
+        double length1 = parameters.getLength1();
+        int K_PTS = parameters.getK_PTS();
+        if (numPoints < 3) { return false; }
+        for (int i = 0 ; i < (numPoints - (1+K_PTS)) ; i++) {
+            point1 = points.get(i);
+            point2 = points.get(i+1+K_PTS);
+            dist = Utils.calculateDistance(point1, point2);
+            if (dist > length1) {
                 return true;
             }
         }

@@ -84,6 +84,23 @@ class CMVTest {
         assertFalse(cmvEightDistantPoints.lic2());
     }
 
+    /**
+     * Checks if lic3 returns true when there are 3 consecutive vertex points that form a triangle with Area greater than 2.0.
+     */
+    @Test
+    void lic3TestTrue() {
+        parameters.setArea1(2.0);
+        assertTrue(cmvEightDistantPoints.lic3());
+    }
+
+    /**
+     * Checks if lic3 returns false when all points are on one line and the area is positive.
+     */
+    @Test
+    void lic3TestFalse() {
+        parameters.setArea1(0.1);
+        assertFalse(cmvThreeClosePointsAscending.lic3());
+    }
     /** Checks if the method lic5 returns true when there exists a pair of consecutive points (p1, p2) where
      * p1's X-coordinate > p2's X-coordinate.
      */
@@ -97,5 +114,25 @@ class CMVTest {
     @Test
     void lic5False() {
         assertFalse(cmvThreeClosePointsAscending.lic5());
+    }
+
+    /** Checks if lic7 returns false when length1 is greater than the distnance between any set of two points
+     * separated by exactly K_PTS consecutive intervening.
+     */
+    @Test
+    void lic7False() {
+        parameters.setK_PTS(1);
+        parameters.setLength1(5.0);
+        assertFalse(cmvThreeClosePointsAscending.lic7());
+    }
+
+    /** Checks if lic7 returns true when length1 is less than at least one set of two points separated by exactly
+     * K_PTS consecutive intervening.
+     */
+    @Test
+    void lic7True() {
+        parameters.setK_PTS(1);
+        parameters.setLength1(3.0);
+        assertTrue(cmvThreeClosePointsAscending.lic7());
     }
 }

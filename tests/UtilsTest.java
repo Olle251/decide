@@ -40,6 +40,16 @@ class UtilsTest {
         double b = 2;
         double c = 2;
 
-        assertEquals(Utils.calculateCircumRadius(a, b, c), (2/Math.sqrt(3)));
+        assertEquals(Utils.calculateCircumRadius(a, b, c), (2 / Math.sqrt(3)));
+    }
+
+    @Test
+    void calculateTriangleAreaTest() {
+        Point2D.Double a = new Point2D.Double(1.0, -2.0);
+        Point2D.Double b = new Point2D.Double(4.0, 2.0);
+        Point2D.Double c = new Point2D.Double(5.0, -2.0);
+
+        assertEquals(Utils.calculateTriangleArea(a, b, c), 8.0);
+
     }
 }

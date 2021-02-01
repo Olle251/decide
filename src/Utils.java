@@ -44,7 +44,23 @@ public class Utils {
      * @return   the radius
      */
     public static double calculateCircumRadius(double a, double b, double c) {
-        double radius = (a*b*c)/ Math.sqrt((a+b+c)*Math.abs(b+c-a)*Math.abs(c+a-b)*Math.abs(a+b-c));
+        double radius = (a * b * c) / Math.sqrt((a + b + c) * Math.abs(b + c - a) * Math.abs(c + a - b) * Math.abs(a + b - c));
         return radius;
+    }
+
+    /**
+     * Returns the area of a triangle spanned by three points in 2D space.
+     * @param p1 a Point2D.Double
+     * @param p2 a Point2D.Double
+     * @param p3 a Point2D.Double
+     * @return the area of the triangle connected by the points
+     */
+    public static double calculateTriangleArea(Point2D.Double p1, Point2D.Double p2, Point2D.Double p3) {
+
+        double intermediateResult1 = p1.getX()*(p2.getY() - p3.getY());
+        double intermediateResult2 = p2.getX()*(p3.getY() - p1.getY());
+        double intermediateResult3 = p3.getX()*(p1.getY() - p2.getY());
+
+        return Math.abs((intermediateResult1 + intermediateResult2 + intermediateResult3)/2.0);
     }
 }
