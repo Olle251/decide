@@ -106,8 +106,8 @@ class CMVTest {
         assertFalse(cmvThreeClosePointsAscending.lic5());
     }
 
-    /** Checks if lic7 returns false when length1 is greater than the distnance between any set of two points
-     * separated by exactly K_PTS consecutive intervening.
+    /**
+     * Checks if the method lic11 returns false when all points are ordered by X-coordinates in ascending order.
      */
     @Test
     void lic11False() {
@@ -115,8 +115,8 @@ class CMVTest {
         assertFalse(cmvThreeClosePointsAscending.lic11());
     }
 
-    /** Checks if lic7 returns true when length1 is less than at least one set of two points separated by exactly
-     * K_PTS consecutive intervening.
+    /**
+     * Checks if lic11 returns true when all points are ordered by X-coordinates in descending order.
      */
     @Test
     void lic11True() {
