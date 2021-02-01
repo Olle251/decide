@@ -198,4 +198,36 @@ public class CMV {
         return false;
     }
 
+    public boolean lic13 () {
+        if (!lic8() || parameters.RADIUS2 < 0) return false;
+        Point2D.Double p1;
+        Point2D.Double p2;
+        Point2D.Double p3;
+        int a_pts = parameters.A_PTS;
+        int b_pts = parameters.B_PTS;
+        double radius2 = parameters.RADIUS2;
+
+        for (int i = 0; i < numPoints-(2+a_pts+b_pts); i++) {
+            p1 = points.get(i);
+            p2 = points.get(i+1+a_pts);
+            p3 = points.get(i+2+a_pts+b_pts);
+
+            double a = Utils.calculateDistance(p1, p2);
+            double b = Utils.calculateDistance(p1, p3);
+            double c = Utils.calculateDistance(p2, p3);
+            double radius = Utils.calculateCircumRadius(a, b, c);
+            //the area could be zero if the points lies in a line
+            if (Double.isInfinite(radius)) {
+                double max1 = Math.max(a, b);
+                double max2 = Math.max(max1, c);
+                if (max2 < radius2) return true;
+
+            } else if (radius < radius2) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
 }
