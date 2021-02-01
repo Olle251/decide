@@ -63,7 +63,7 @@ class CMVTest {
 
     @Test
     void lic1TestFalse() {
-        parameters.setRadius1(100);
+        parameters.setRadius1(1000);
         assertFalse(cmvEightDistantPoints.lic1());
     }
 
