@@ -12,10 +12,13 @@ class CMVTest {
     private Parameters parameters;
     private List<Point2D.Double> eightDistantPoints;
     private List<Point2D.Double> threeClosePointsAscending;
+    private List<Point2D.Double> threeClosePointsDescending;
     private int numPoints1;
     private int numPoints2;
+    private int numPoints3;
     private CMV cmvEightDistantPoints;
     private CMV cmvThreeClosePointsAscending;
+    private CMV cmvThreeClosePointsDescending;
 
     @BeforeEach
     void setUp() {
@@ -25,10 +28,14 @@ class CMVTest {
                 new Point2D.Double(25.0,32.0), new Point2D.Double(30.0,34.0), new Point2D.Double(35.0,45.0));
         threeClosePointsAscending = Arrays.asList(new Point2D.Double(1.0,1.0), new Point2D.Double(2.0,2.0),
                 new Point2D.Double(4.0,4.0));
+        threeClosePointsDescending = Arrays.asList(new Point2D.Double(4.0,4.0), new Point2D.Double(2.0,2.0),
+                new Point2D.Double(1.0,1.0));
         numPoints1 = this.eightDistantPoints.size();
         numPoints2 = this.threeClosePointsAscending.size();
+        numPoints3 = this.threeClosePointsDescending.size();
         cmvEightDistantPoints = new CMV(eightDistantPoints, numPoints1, parameters);
         cmvThreeClosePointsAscending = new CMV(threeClosePointsAscending, numPoints2, parameters);
+        cmvThreeClosePointsDescending = new CMV(threeClosePointsDescending, numPoints3, parameters);
     }
 
     @AfterEach
@@ -134,5 +141,23 @@ class CMVTest {
         parameters.setK_PTS(1);
         parameters.setLength1(3.0);
         assertTrue(cmvThreeClosePointsAscending.lic7());
+    }
+
+    /**
+     * Checks if the method lic11 returns false when all points are ordered by X-coordinates in ascending order.
+     */
+    @Test
+    void lic11False() {
+        parameters.setG_PTS(1);
+        assertFalse(cmvThreeClosePointsAscending.lic11());
+    }
+
+    /**
+     * Checks if lic11 returns true when all points are ordered by X-coordinates in descending order.
+     */
+    @Test
+    void lic11True() {
+        parameters.setG_PTS(1);
+        assertTrue(cmvThreeClosePointsDescending.lic11());
     }
 }
