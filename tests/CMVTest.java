@@ -182,4 +182,28 @@ class CMVTest {
         parameters.setG_PTS(1);
         assertTrue(cmvEightDistantPoints.lic11());
     }
+
+    /**
+     * Checks if the method lic13 returns false
+     */
+    @Test
+    void lic13False() {
+        parameters.setA_PTS(1);
+        parameters.setB_PTS(2);
+        parameters.setRadius1(0.1);
+        parameters.setRadius2(0.1);
+        assertFalse(cmvEightDistantPoints.lic13());
+    }
+
+    /**
+     * ....
+     */
+    @Test
+    void lic13True() {
+        parameters.setA_PTS(1);
+        parameters.setB_PTS(2);
+        parameters.setRadius1(0.1);
+        parameters.setRadius2(500);
+        assertTrue(cmvEightDistantPoints.lic13());
+    }
 }
