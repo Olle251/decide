@@ -43,66 +43,70 @@ class CMVTest {
     void createCMV() {
     }
 
-    /** Checks if the method lic0 returns false when length1 is greater than the distance between any pair of consecutive
-     * points.
-     */
+    //Checks if the method lic0 returns false when length1 is greater than the distance between any pair of consecutive points.
     @Test
     void lic0TestFalse() {
         parameters.setLength1(3.0);
         assertFalse(cmvThreeClosePointsLine.lic0());
     }
 
-    /** Checks if the method lic0 returns true when length1 is less than the distance between at least one pair of
-     * consecutive points.
-     */
+    //Checks if the method lic0 returns true when length1 is less than the distance between at least one pair of consecutive points.
     @Test
     void lic0TestTrue() {
         parameters.setLength1(2.0);
         assertTrue(cmvThreeClosePointsLine.lic0());
     }
 
+    //Checks if the method lic1 returns false when radius1 is greater than the circumRadius calculated.
     @Test
     void lic1TestFalse() {
-        parameters.setRadius1(1000);
+        parameters.setRadius1(500);
         assertFalse(cmvEightDistantPoints.lic1());
     }
 
+    //Checks if the method lic1 returns true when radius1 is less than the circumRadius calculated.
     @Test
     void lic1TestTrue() {
         parameters.setRadius1(1);
         assertTrue(cmvEightDistantPoints.lic1());
     }
 
-    @Test
-    void lic2TestTrue() {
-        parameters.setEpsilon(0.0);
-        assertTrue(cmvEightDistantPoints.lic2());
-    }
+    //Checks if the method lic2 returns false when epsilon is PI.
     @Test
     void lic2TestFalse() {
         parameters.setEpsilon(Math.PI);
         assertFalse(cmvEightDistantPoints.lic2());
     }
-
-    /**
-     * Checks if lic3 returns true when there are 3 consecutive vertex points that form a triangle with Area greater than 2.0.
-     */
+    //Checks if the method lic2 returns true when epsilon is 0.
     @Test
-    void lic3TestTrue() {
-        parameters.setArea1(2.0);
-        assertTrue(cmvEightDistantPoints.lic3());
+    void lic2TestTrue() {
+        parameters.setEpsilon(0.0);
+        assertTrue(cmvEightDistantPoints.lic2());
     }
 
-    /**
-     * Checks if lic3 returns false when all points are on one line and the area is positive.
-     */
+    //Checks if lic3 returns false when all points are on one line and the area is positive.
     @Test
     void lic3TestFalse() {
         parameters.setArea1(0.1);
         assertFalse(cmvThreeClosePointsLine.lic3());
     }
 
+    //Checks if lic3 returns true when there are 3 consecutive vertex points that form a triangle with Area greater than 2.0.
+    @Test
+    void lic3TestTrue() {
+        parameters.setArea1(2.0);
+        assertTrue(cmvEightDistantPoints.lic3());
+    }
 
+    //Checks if lic4 returns false when there is 2 quadrants.
+    @Test
+    void lic4TestFalse() {
+        parameters.setQ_PTS(5);
+        parameters.setQUADS(2);
+        assertFalse(cmvEightDistantPoints.lic4());
+    }
+
+    //Checks if lic4 returns true when there is only 1 quadrant.
     @Test
     void lic4TestTrue() {
         parameters.setQUADS(1);
@@ -110,24 +114,16 @@ class CMVTest {
         assertTrue(cmvEightDistantPoints.lic4());
     }
 
-    @Test
-    void lic4TestFalse() {
-        parameters.setQ_PTS(5);
-        parameters.setQUADS(2);
-    }
-    /** Checks if the method lic5 returns true when there exists a pair of consecutive points (p1, p2) where
-     * p1's X-coordinate > p2's X-coordinate.
-     */
-    @Test
-    void lic5TestTrue() {
-        assertTrue(cmvEightDistantPoints.lic5());
-    }
-
-    /** Checks if the method lic5 returns false when all points are ordered by X-coordinates in ascending order.
-     */
+    //Checks if the method lic5 returns false when all points are ordered by X-coordinates in ascending order.
     @Test
     void lic5TestFalse() {
         assertFalse(cmvThreeClosePointsLine.lic5());
+    }
+
+    //Checks if the method lic5 returns true when there exists a pair of consecutive points (p1, p2) where p1's X-coordinate > p2's X-coordinate.
+    @Test
+    void lic5TestTrue() {
+        assertTrue(cmvEightDistantPoints.lic5());
     }
 
     // Checks if method lic6 return false when the distance is a very large number, and therefore should be bigger than the calculated distance.
@@ -146,9 +142,7 @@ class CMVTest {
         assertFalse(cmvThreeClosePointsLine.lic6());
     }
 
-    /** Checks if lic7 returns false when length1 is greater than the distnance between any set of two points
-     * separated by exactly K_PTS consecutive intervening.
-     */
+    //Checks if lic7 returns false when length1 is greater than the distnance between any set of two points separated by exactly K_PTS consecutive intervening.
     @Test
     void lic7TestFalse() {
         parameters.setK_PTS(1);
@@ -156,9 +150,7 @@ class CMVTest {
         assertFalse(cmvThreeClosePointsLine.lic7());
     }
 
-    /** Checks if lic7 returns true when length1 is less than at least one set of two points separated by exactly
-     * K_PTS consecutive intervening.
-     */
+    // Checks if lic7 returns true when length1 is less than at least one set of two points separated by exactly K_PTS consecutive intervening.
     @Test
     void lic7TestTrue() {
         parameters.setK_PTS(1);
@@ -166,6 +158,7 @@ class CMVTest {
         assertTrue(cmvThreeClosePointsLine.lic7());
     }
 
+    // Checks if lic8 returns false when radius1 is greater than 500.
     @Test
     void lic8TestFalse() {
         parameters.setA_PTS(1);
@@ -173,6 +166,8 @@ class CMVTest {
         parameters.setRadius1(500);
         assertFalse(cmvEightDistantPoints.lic8());
     }
+
+    // Checks if lic8 returns true when radius1 is less than 0.1.
     @Test
     void lic8TestTrue() {
         parameters.setA_PTS(1);
@@ -181,9 +176,7 @@ class CMVTest {
         assertTrue(cmvEightDistantPoints.lic8());
     }
 
-    /**
-     * Sets epsilon to PI to check for an angle smaller than 0 degrees or larger than 360 degrees. Should return false.
-     */
+    //Sets epsilon to PI to check for an angle smaller than 0 degrees or larger than 360 degrees. Should return false.
     @Test
     void lic9TestFalse() {
         parameters.setC_PTS(1);
@@ -192,9 +185,7 @@ class CMVTest {
         assertFalse(cmvEightDistantPoints.lic9());
     }
 
-    /**
-     * Sets epsilon to 0, which means every angle should return true unless all points are in a line or there are input issues.
-     */
+    //Sets epsilon to 0, which means every angle should return true unless all points are in a line or there are input issues.
     @Test
     void lic9TestTrue() {
         parameters.setC_PTS(1);
@@ -203,11 +194,7 @@ class CMVTest {
         assertTrue(cmvEightDistantPoints.lic9());
     }
 
-
-    /**
-     * Sets area1 to a large value which no points in the standard test cases can cover.
-     */
-
+    // Sets area1 to a large value which no points in the standard test cases can cover.
     @Test
     void lic10TestFalse() {
         parameters.setE_PTS(1);
@@ -215,9 +202,8 @@ class CMVTest {
         parameters.setArea1(10000);
         assertFalse(cmvEightDistantPoints.lic10());
     }
-    /**
-     * Sets E_pts to a negative value which should cause method to return false
-     */
+
+    //Sets E_pts to a negative value which should cause method to return false
     @Test
     void lic10TestFalse2() {
         parameters.setE_PTS(-1);
@@ -225,9 +211,8 @@ class CMVTest {
         parameters.setArea1(1);
         assertFalse(cmvEightDistantPoints.lic10());
     }
-    /**
-     * Sets area1 to a small value which the standard test case should cover
-     */
+
+    //Sets area1 to a small value which the standard test case should cover
     @Test
     void lic10TestTrue() {
         parameters.setE_PTS(1);
@@ -235,27 +220,22 @@ class CMVTest {
         parameters.setArea1(1);
         assertTrue(cmvEightDistantPoints.lic10());
     }
-    /**
-     * Checks if the method lic11 returns false when all points are ordered by X-coordinates in ascending order.
-     */
+
+    // Checks if the method lic11 returns false when all points are ordered by X-coordinates in ascending order.
     @Test
     void lic11TestFalse() {
         parameters.setG_PTS(1);
         assertFalse(cmvThreeClosePointsLine.lic11());
     }
 
-    /**
-     * Checks if lic11 returns true when all points are ordered by X-coordinates in descending order.
-     */
+    // Checks if lic11 returns true when all points are ordered by X-coordinates in descending order.
     @Test
     void lic11TestTrue() {
         parameters.setG_PTS(1);
         assertTrue(cmvEightDistantPoints.lic11());
     }
 
-    /**
-     * Checks if the method lic13 returns false
-     */
+    //Checks if the method lic13 returns false when both radius1 and radius2 are set to 0.1
     @Test
     void lic13TestFalse() {
         parameters.setA_PTS(1);
@@ -265,9 +245,7 @@ class CMVTest {
         assertFalse(cmvEightDistantPoints.lic13());
     }
 
-    /**
-     * ....
-     */
+    //Checks if the method lic13 returns true when both radius1 is set to 0.1 and radius2 is set to 500
     @Test
     void lic13TestTrue() {
         parameters.setA_PTS(1);
