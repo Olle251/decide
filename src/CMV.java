@@ -80,7 +80,7 @@ public class CMV {
             Point2D.Double p2 = points.get(i-1);
             Point2D.Double p1 = points.get(i-2);
 
-            if (!(p1.equals(p2) | p3.equals(p2))){
+            if (!(p1.equals(p2) || p3.equals(p2))){
             double angle = Utils.calculateAngle(p1, p2, p3);
                 if (angle < (Math.PI - parameters.getEpsilon()) || angle > Math.PI + parameters.getEpsilon()) {
                     return true;
@@ -146,7 +146,7 @@ public class CMV {
             int sum = 0;
             for (Integer num : visitedQuadrants) {
                 sum = sum + num;
-                System.out.print(sum + " ");
+
             }
             if (sum >= quads) {
                 return true;
@@ -167,6 +167,48 @@ public class CMV {
         }
         return false;
     }
+
+    /**
+     * Checks the distance between a point and a line between points compared with distance in parameters.
+     * If the two points creating the line is the same then we calculate the distance from that point to all other points of n_pts.
+     * @return true/false which tells if distance in parameters is bigger than the calculated distance.
+     */
+    public boolean lic6 () {
+        int n_pts = parameters.getN_PTS();
+        double dist = parameters.getDIST();
+        if (numPoints < 3 || (3 > n_pts || n_pts > numPoints) || 0 > dist) return false;
+
+        for (int i = 0; i < numPoints-n_pts; i++) {
+            Point2D.Double first = points.get(i);
+            Point2D.Double last = points.get(i+n_pts);
+
+            //Calculate the line between first and last
+            double diffX = last.getX() - first.getX();
+            double diffY = last.getY() - first.getY();
+            double slope = diffY/diffX;
+            double intersectY = first.getY() - first.getX()*slope;
+
+            //For every n_pts
+            for (int j = 1; j < n_pts-1; j++) {
+                double calcDist;
+                Point2D.Double currPoint = points.get(i+j);
+                //If first and last is the same.
+                if (first.equals(last)) {
+                    //calculate distance between two points.
+                    calcDist = Utils.calculateDistance(first, currPoint);
+                } else {
+                    //Calculate distance between a point and a line
+                    calcDist = (Math.abs((slope*currPoint.getX()) + (-1*currPoint.getY()) + intersectY)) / Math.sqrt(Math.pow(slope,2) + 1);
+                }
+                if (calcDist > dist) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
 
     /** Checks if there exists at least one set of two data points separated by exactly K_PTS consecutive intervening
      * points that are a distance greater than the length, LENGTH1, apart.
@@ -221,6 +263,45 @@ public class CMV {
         return false;
     }
 
+    /**
+     * Checks if there are at least one set of 3 data points separated by C_PTS and D_PTS consecutive points respectively.
+     * These 3 data points form an angle larger than pi + epsilon or smaller than pi - epsilon.
+     * As additional requirements, the number of data points has to be at least 5, the C_PTS and D_PTS parameters have to be larger than 1
+     * and C_PTS+D_PTS have to be at least as large as the number of points - 3.
+     * @return true/false
+     */
+    public boolean lic9() {
+        if (numPoints < 5 || 1 > parameters.C_PTS || 1 > parameters.D_PTS || (parameters.C_PTS + parameters.D_PTS) >= (numPoints-3)) return false;
+        Point2D.Double p1;
+        Point2D.Double p2;
+        Point2D.Double p3;
+        int c_pts = parameters.C_PTS;
+        int d_pts = parameters.D_PTS;
+        double epsilon = parameters.getEpsilon();
+        double pi = Math.PI;
+
+        for (int i = 0; i < numPoints-(2+c_pts+d_pts); i++) {
+            p1 = points.get(i);
+            p2 = points.get(i+1+c_pts);
+            p3 = points.get(i+2+c_pts+d_pts);
+
+            if (!(p1.equals(p2) || p3.equals(p2))) {
+                double angle = Utils.calculateAngle(p1, p2, p3);
+                if (angle < pi-epsilon || angle > pi+epsilon){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if there are at least one set of 3 data points separated by E_PTS and F_PTS consecutive points respectively.
+     * These 3 data points form a triangle larger than AREA1.
+     * As additional requirements, the number of data points has to be at least 5, the E_PTS and F_PTS parameters have to be larger than 1
+     * and E_PTS+F_PTS have to be at least as large as the number of points - 3.
+     * @return true/false
+     */
     public boolean lic10() {
         if (numPoints < 5 || 1 > parameters.E_PTS || 1 > parameters.F_PTS || (parameters.E_PTS + parameters.F_PTS) >= (numPoints-3)) return false;
         Point2D.Double p1;
@@ -234,7 +315,6 @@ public class CMV {
             p1 = points.get(i);
             p2 = points.get(i+1+e_pts);
             p3 = points.get(i+2+e_pts+f_pts);
-
 
             double area = Utils.calculateTriangleArea(p1, p2, p3);
             //the area could be zero if the points lies in a line
@@ -320,6 +400,37 @@ public class CMV {
         }
         return false;
 
+    }
+
+    /**
+     * Checks if there are at least two sets of 3 data points separated by E_PTS and F_PTS consecutive points respectively.
+     * These two sets contain 3 data points which form at least one triangle larger than AREA1 and smaller than AREA2 respectively.
+     * As additional requirements, the number of data points has to be at least 5, the E_PTS and F_PTS parameters have to be larger than 1
+     * and E_PTS+F_PTS have to be at least as large as the number of points - 3. AREA2 should be non-negative.
+     * @return true/false
+     */
+    public boolean lic14() {
+        if(parameters.getArea2() < 0) return false;
+        if (!lic10()) return false;
+        Point2D.Double p1;
+        Point2D.Double p2;
+        Point2D.Double p3;
+        int e_pts = parameters.E_PTS;
+        int f_pts = parameters.F_PTS;
+        double area2 = parameters.getArea2();
+
+        for (int i = 0; i < numPoints-(2+e_pts+f_pts); i++) {
+            p1 = points.get(i);
+            p2 = points.get(i+1+e_pts);
+            p3 = points.get(i+2+e_pts+f_pts);
+
+            double area = Utils.calculateTriangleArea(p1, p2, p3);
+            //the area could be zero if the points lies in a line
+            if (area < area2){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
