@@ -11,31 +11,24 @@ import java.util.List;
 class CMVTest {
     private Parameters parameters;
     private List<Point2D.Double> eightDistantPoints;
-    private List<Point2D.Double> threeClosePointsAscending;
-    private List<Point2D.Double> threeClosePointsDescending;
+    private List<Point2D.Double> threeClosePointsLine;
     private int numPoints1;
     private int numPoints2;
-    private int numPoints3;
     private CMV cmvEightDistantPoints;
-    private CMV cmvThreeClosePointsAscending;
-    private CMV cmvThreeClosePointsDescending;
+    private CMV cmvThreeClosePointsLine;
 
     @BeforeEach
     void setUp() {
         parameters = new Parameters();
         eightDistantPoints = Arrays.asList(new Point2D.Double(7.0,20.0), new Point2D.Double(9.0,25.0),
-                new Point2D.Double(12.0,23.0), new Point2D.Double(15.0,21.0),new Point2D.Double(14.0,28.0),
+                new Point2D.Double(6.0,20.0), new Point2D.Double(15.0,21.0),new Point2D.Double(14.0,28.0),
                 new Point2D.Double(25.0,32.0), new Point2D.Double(30.0,34.0), new Point2D.Double(35.0,45.0));
-        threeClosePointsAscending = Arrays.asList(new Point2D.Double(1.0,1.0), new Point2D.Double(2.0,2.0),
+        threeClosePointsLine = Arrays.asList(new Point2D.Double(1.0,1.0), new Point2D.Double(2.0,2.0),
                 new Point2D.Double(4.0,4.0));
-        threeClosePointsDescending = Arrays.asList(new Point2D.Double(4.0,4.0), new Point2D.Double(2.0,2.0),
-                new Point2D.Double(1.0,1.0));
         numPoints1 = this.eightDistantPoints.size();
-        numPoints2 = this.threeClosePointsAscending.size();
-        numPoints3 = this.threeClosePointsDescending.size();
+        numPoints2 = this.threeClosePointsLine.size();
         cmvEightDistantPoints = new CMV(eightDistantPoints, numPoints1, parameters);
-        cmvThreeClosePointsAscending = new CMV(threeClosePointsAscending, numPoints2, parameters);
-        cmvThreeClosePointsDescending = new CMV(threeClosePointsDescending, numPoints3, parameters);
+        cmvThreeClosePointsLine = new CMV(threeClosePointsLine, numPoints2, parameters);
     }
 
     @AfterEach
@@ -56,7 +49,7 @@ class CMVTest {
     @Test
     void lic0TestFalse() {
         parameters.setLength1(3.0);
-        assertFalse(cmvThreeClosePointsAscending.lic0());
+        assertFalse(cmvThreeClosePointsLine.lic0());
     }
 
     /** Checks if the method lic0 returns true when length1 is less than the distance between at least one pair of
@@ -65,7 +58,7 @@ class CMVTest {
     @Test
     void lic0TestTrue() {
         parameters.setLength1(2.0);
-        assertTrue(cmvThreeClosePointsAscending.lic0());
+        assertTrue(cmvThreeClosePointsLine.lic0());
     }
 
     @Test
@@ -106,7 +99,7 @@ class CMVTest {
     @Test
     void lic3TestFalse() {
         parameters.setArea1(0.1);
-        assertFalse(cmvThreeClosePointsAscending.lic3());
+        assertFalse(cmvThreeClosePointsLine.lic3());
     }
 
 
@@ -134,7 +127,7 @@ class CMVTest {
      */
     @Test
     void lic5False() {
-        assertFalse(cmvThreeClosePointsAscending.lic5());
+        assertFalse(cmvThreeClosePointsLine.lic5());
     }
 
     /** Checks if lic7 returns false when length1 is greater than the distnance between any set of two points
@@ -144,7 +137,7 @@ class CMVTest {
     void lic7False() {
         parameters.setK_PTS(1);
         parameters.setLength1(5.0);
-        assertFalse(cmvThreeClosePointsAscending.lic7());
+        assertFalse(cmvThreeClosePointsLine.lic7());
     }
 
     /** Checks if lic7 returns true when length1 is less than at least one set of two points separated by exactly
@@ -154,7 +147,7 @@ class CMVTest {
     void lic7True() {
         parameters.setK_PTS(1);
         parameters.setLength1(3.0);
-        assertTrue(cmvThreeClosePointsAscending.lic7());
+        assertTrue(cmvThreeClosePointsLine.lic7());
     }
 
     @Test
@@ -178,7 +171,7 @@ class CMVTest {
     @Test
     void lic11False() {
         parameters.setG_PTS(1);
-        assertFalse(cmvThreeClosePointsAscending.lic11());
+        assertFalse(cmvThreeClosePointsLine.lic11());
     }
 
     /**
@@ -187,6 +180,6 @@ class CMVTest {
     @Test
     void lic11True() {
         parameters.setG_PTS(1);
-        assertTrue(cmvThreeClosePointsDescending.lic11());
+        assertTrue(cmvEightDistantPoints.lic11());
     }
 }
