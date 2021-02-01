@@ -96,4 +96,24 @@ public class CMV {
         return false;
     }
 
+    /**
+     * Checks if there exists a set of two data points, (X[i],Y[i]) and (X[j],Y[j]), separated by
+     * exactly G_PTS consecutive intervening points, such that X[j] - X[i] < 0. (where i < j ).
+     * @return boolean value
+     */
+    public boolean lic11 () {
+        Point2D.Double p1;
+        Point2D.Double p2;
+        int G_PTS = parameters.getG_PTS();
+        if (numPoints < 3) { return false; }
+        for (int i = 0; i < numPoints-1-G_PTS; i++) {
+            p1 = points.get(i);
+            p2 = points.get(i+1+G_PTS);
+            if (p2.getX() < p1.getX()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
