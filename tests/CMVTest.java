@@ -1,7 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 import java.awt.geom.Point2D;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -10,23 +9,23 @@ import java.util.List;
 
 class CMVTest {
     private Parameters parameters;
-    private List<Point2D.Double> eightDistantPoints;
-    private List<Point2D.Double> threeClosePointsLine;
-    private int numPoints1;
-    private int numPoints2;
     private CMV cmvEightDistantPoints;
     private CMV cmvThreeClosePointsLine;
 
     @BeforeEach
     void setUp() {
         parameters = new Parameters();
+        List<Point2D.Double> eightDistantPoints;
+        List<Point2D.Double> threeClosePointsLine;
+        int numPoints1;
+        int numPoints2;
         eightDistantPoints = Arrays.asList(new Point2D.Double(7.0,20.0), new Point2D.Double(9.0,25.0),
                 new Point2D.Double(6.0,20.0), new Point2D.Double(15.0,21.0),new Point2D.Double(14.0,28.0),
                 new Point2D.Double(25.0,32.0), new Point2D.Double(30.0,34.0), new Point2D.Double(35.0,45.0));
         threeClosePointsLine = Arrays.asList(new Point2D.Double(1.0,1.0), new Point2D.Double(2.0,2.0),
                 new Point2D.Double(4.0,4.0));
-        numPoints1 = this.eightDistantPoints.size();
-        numPoints2 = this.threeClosePointsLine.size();
+        numPoints1 = eightDistantPoints.size();
+        numPoints2 = threeClosePointsLine.size();
         cmvEightDistantPoints = new CMV(eightDistantPoints, numPoints1, parameters);
         cmvThreeClosePointsLine = new CMV(threeClosePointsLine, numPoints2, parameters);
     }
@@ -142,7 +141,7 @@ class CMVTest {
         assertFalse(cmvThreeClosePointsLine.lic6());
     }
 
-    //Checks if lic7 returns false when length1 is greater than the distnance between any set of two points separated by exactly K_PTS consecutive intervening.
+    //Checks if lic7 returns false when length1 is greater than the distance between any set of two points separated by exactly K_PTS consecutive intervening.
     @Test
     void lic7TestFalse() {
         parameters.setK_PTS(1);
@@ -235,6 +234,27 @@ class CMVTest {
         assertTrue(cmvEightDistantPoints.lic11());
     }
 
+    //Checks if lic12 returns false when length1 is greater or length2 is shorter than the distance between any points.
+    @Test
+    void lic12False() {
+        parameters.setK_PTS(1);
+        parameters.setLength1(1.0);
+        parameters.setLength2(1.0);
+        assertFalse(cmvThreeClosePointsLine.lic12());
+        parameters.setLength1(5.0);
+        parameters.setLength2(5.0);
+        assertFalse(cmvThreeClosePointsLine.lic12());
+    }
+
+    //Checks if lic12 returns true when length1 is less and length2 is greater than a pair of K_PTS-separated points.
+    @Test
+    void lic12True() {
+        parameters.setK_PTS(1);
+        parameters.setLength1(3.0);
+        parameters.setLength2(5.0);
+        assertTrue(cmvThreeClosePointsLine.lic12());
+    }
+
     //Checks if the method lic13 returns false when both radius1 and radius2 are set to 0.1
     @Test
     void lic13TestFalse() {
@@ -254,9 +274,8 @@ class CMVTest {
         parameters.setRadius2(500);
         assertTrue(cmvEightDistantPoints.lic13());
     }
-    /**
-     * Sets area1 to a small value which the standard test case should evaluate to false
-     */
+
+    //Sets area1 to a small value which the standard test case should evaluate to false
     @Test
     void lic14TestFalse() {
         parameters.setE_PTS(1);
@@ -265,9 +284,8 @@ class CMVTest {
         parameters.setArea2(1);
         assertFalse(cmvEightDistantPoints.lic14());
     }
-    /**
-     * Sets area2 to a large value which the standard test case should evaluate to true.
-     */
+
+    //Sets area2 to a large value which the standard test case should evaluate to true.
     @Test
     void lic14TestTrue() {
         parameters.setE_PTS(1);
