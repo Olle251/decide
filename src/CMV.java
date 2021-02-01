@@ -146,7 +146,7 @@ public class CMV {
             int sum = 0;
             for (Integer num : visitedQuadrants) {
                 sum = sum + num;
-                System.out.print(sum + " ");
+
             }
             if (sum >= quads) {
                 return true;
@@ -167,6 +167,48 @@ public class CMV {
         }
         return false;
     }
+
+    /**
+     * Checks the distance between a point and a line between points compared with distance in parameters.
+     * If the two points creating the line is the same then we calculate the distance from that point to all other points of n_pts.
+     * @return true/false which tells if distance in parameters is bigger than the calculated distance.
+     */
+    public boolean lic6 () {
+        int n_pts = parameters.getN_PTS();
+        double dist = parameters.getDIST();
+        if (numPoints < 3 || (3 > n_pts || n_pts > numPoints) || 0 > dist) return false;
+
+        for (int i = 0; i < numPoints-n_pts; i++) {
+            Point2D.Double first = points.get(i);
+            Point2D.Double last = points.get(i+n_pts);
+
+            //Calculate the line between first and last
+            double diffX = last.getX() - first.getX();
+            double diffY = last.getY() - first.getY();
+            double slope = diffY/diffX;
+            double intersectY = first.getY() - first.getX()*slope;
+
+            //For every n_pts
+            for (int j = 1; j < n_pts-1; j++) {
+                double calcDist;
+                Point2D.Double currPoint = points.get(i+j);
+                //If first and last is the same.
+                if (first.equals(last)) {
+                    //calculate distance between two points.
+                    calcDist = Utils.calculateDistance(first, currPoint);
+                } else {
+                    //Calculate distance between a point and a line
+                    calcDist = (Math.abs((slope*currPoint.getX()) + (-1*currPoint.getY()) + intersectY)) / Math.sqrt(Math.pow(slope,2) + 1);
+                }
+                if (calcDist > dist) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
 
     /** Checks if there exists at least one set of two data points separated by exactly K_PTS consecutive intervening
      * points that are a distance greater than the length, LENGTH1, apart.
