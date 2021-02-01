@@ -130,6 +130,22 @@ class CMVTest {
         assertFalse(cmvThreeClosePointsLine.lic5());
     }
 
+    // Checks if method lic6 return false when the distance is a very large number, and therefore should be bigger than the calculated distance.
+    @Test
+    void lic6TestFalse() {
+        parameters.setDIST(100);
+        parameters.setN_PTS(3);
+        assertFalse(cmvThreeClosePointsLine.lic6());
+    }
+
+    //Checks if the method lic6 returns true when the distance is set to a small number, and therefore should be smaller than the calculated distance.
+    @Test
+    void lic6TestTrue() {
+        parameters.setDIST(1);
+        parameters.setN_PTS(3);
+        assertFalse(cmvThreeClosePointsLine.lic6());
+    }
+
     /** Checks if lic7 returns false when length1 is greater than the distnance between any set of two points
      * separated by exactly K_PTS consecutive intervening.
      */
