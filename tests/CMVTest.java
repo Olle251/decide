@@ -143,6 +143,21 @@ class CMVTest {
         assertTrue(cmvThreeClosePointsAscending.lic7());
     }
 
+    @Test
+    void lic8False() {
+        parameters.setA_PTS(1);
+        parameters.setB_PTS(2);
+        parameters.setRadius1(500);
+        assertFalse(cmvEightDistantPoints.lic8());
+    }
+    @Test
+    void lic8True() {
+        parameters.setA_PTS(1);
+        parameters.setB_PTS(2);
+        parameters.setRadius1(0.1);
+        assertTrue(cmvEightDistantPoints.lic8());
+    }
+
     /**
      * Checks if the method lic11 returns false when all points are ordered by X-coordinates in ascending order.
      */

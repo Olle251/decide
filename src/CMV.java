@@ -147,6 +147,37 @@ public class CMV {
         return false;
     }
 
+    public boolean lic8() {
+        if (numPoints < 5 || 1 > parameters.A_PTS || 1 > parameters.B_PTS || (parameters.A_PTS + parameters.B_PTS) >= (numPoints-3)) return false;
+        Point2D.Double p1;
+        Point2D.Double p2;
+        Point2D.Double p3;
+        int a_pts = parameters.A_PTS;
+        int b_pts = parameters.B_PTS;
+        double radius1 = parameters.RADIUS1;
+
+        for (int i = 0; i < numPoints-(2+a_pts+b_pts); i++) {
+            p1 = points.get(i);
+            p2 = points.get(i+1+a_pts);
+            p3 = points.get(i+2+a_pts+b_pts);
+
+            double a = Utils.calculateDistance(p1, p2);
+            double b = Utils.calculateDistance(p1, p3);
+            double c = Utils.calculateDistance(p2, p3);
+            double radius = Utils.calculateCircumRadius(a, b, c);
+            //the area could be zero if the points lies in a line
+            if (Double.isInfinite(radius)) {
+                double max1 = Math.max(a, b);
+                double max2 = Math.max(max1, c);
+                if (max2 > radius1) return true;
+
+            } else if (radius > radius1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Checks if there exists a set of two data points, (X[i],Y[i]) and (X[j],Y[j]), separated by
      * exactly G_PTS consecutive intervening points, such that X[j] - X[i] < 0. (where i < j ).
