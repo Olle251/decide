@@ -115,4 +115,24 @@ class CMVTest {
     void lic5False() {
         assertFalse(cmvThreeClosePointsAscending.lic5());
     }
+
+    /** Checks if lic7 returns false when length1 is greater than the distnance between any set of two points
+     * separated by exactly K_PTS consecutive intervening.
+     */
+    @Test
+    void lic7False() {
+        parameters.setK_PTS(1);
+        parameters.setLength1(5.0);
+        assertFalse(cmvThreeClosePointsAscending.lic7());
+    }
+
+    /** Checks if lic7 returns true when length1 is less than at least one set of two points separated by exactly
+     * K_PTS consecutive intervening.
+     */
+    @Test
+    void lic7True() {
+        parameters.setK_PTS(1);
+        parameters.setLength1(3.0);
+        assertTrue(cmvThreeClosePointsAscending.lic7());
+    }
 }
