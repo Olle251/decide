@@ -280,7 +280,7 @@ class CMVTest {
      * Sets area1 to a small value which the standard test case should evaluate to false
      */
     @Test
-    void lic14False() {
+    void lic14TestFalse() {
         parameters.setE_PTS(1);
         parameters.setF_PTS(2);
         parameters.setArea1(1);
@@ -291,7 +291,7 @@ class CMVTest {
      * Sets area2 to a large value which the standard test case should evaluate to true.
      */
     @Test
-    void lic14True() {
+    void lic14TestTrue() {
         parameters.setE_PTS(1);
         parameters.setF_PTS(2);
         parameters.setArea1(1);  //From previous tests this evaluates true for lic 10, which is the first part of the lic14 method.
