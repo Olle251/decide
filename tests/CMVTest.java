@@ -104,7 +104,7 @@ class CMVTest {
 
 
     @Test
-    void lic4TestTruue() {
+    void lic4TestTrue() {
         parameters.setQUADS(1);
         parameters.setQ_PTS(5);
         assertTrue(cmvEightDistantPoints.lic4());
@@ -119,14 +119,14 @@ class CMVTest {
      * p1's X-coordinate > p2's X-coordinate.
      */
     @Test
-    void lic5True() {
+    void lic5TestTrue() {
         assertTrue(cmvEightDistantPoints.lic5());
     }
 
     /** Checks if the method lic5 returns false when all points are ordered by X-coordinates in ascending order.
      */
     @Test
-    void lic5False() {
+    void lic5TestFalse() {
         assertFalse(cmvThreeClosePointsLine.lic5());
     }
 
@@ -150,7 +150,7 @@ class CMVTest {
      * separated by exactly K_PTS consecutive intervening.
      */
     @Test
-    void lic7False() {
+    void lic7TestFalse() {
         parameters.setK_PTS(1);
         parameters.setLength1(5.0);
         assertFalse(cmvThreeClosePointsLine.lic7());
@@ -160,21 +160,21 @@ class CMVTest {
      * K_PTS consecutive intervening.
      */
     @Test
-    void lic7True() {
+    void lic7TestTrue() {
         parameters.setK_PTS(1);
         parameters.setLength1(3.0);
         assertTrue(cmvThreeClosePointsLine.lic7());
     }
 
     @Test
-    void lic8False() {
+    void lic8TestFalse() {
         parameters.setA_PTS(1);
         parameters.setB_PTS(2);
         parameters.setRadius1(500);
         assertFalse(cmvEightDistantPoints.lic8());
     }
     @Test
-    void lic8True() {
+    void lic8TestTrue() {
         parameters.setA_PTS(1);
         parameters.setB_PTS(2);
         parameters.setRadius1(0.1);
@@ -185,7 +185,7 @@ class CMVTest {
      * Sets epsilon to PI to check for an angle smaller than 0 degrees or larger than 360 degrees. Should return false.
      */
     @Test
-    void lic9False() {
+    void lic9TestFalse() {
         parameters.setC_PTS(1);
         parameters.setD_PTS(2);
         parameters.setEpsilon(Math.PI);
@@ -196,7 +196,7 @@ class CMVTest {
      * Sets epsilon to 0, which means every angle should return true unless all points are in a line or there are input issues.
      */
     @Test
-    void lic9True() {
+    void lic9TestTrue() {
         parameters.setC_PTS(1);
         parameters.setD_PTS(2);
         parameters.setEpsilon(0.0);
@@ -209,7 +209,7 @@ class CMVTest {
      */
 
     @Test
-    void lic10False() {
+    void lic10TestFalse() {
         parameters.setE_PTS(1);
         parameters.setF_PTS(2);
         parameters.setArea1(10000);
@@ -219,7 +219,7 @@ class CMVTest {
      * Sets E_pts to a negative value which should cause method to return false
      */
     @Test
-    void lic10False2() {
+    void lic10TestFalse2() {
         parameters.setE_PTS(-1);
         parameters.setF_PTS(2);
         parameters.setArea1(1);
@@ -229,7 +229,7 @@ class CMVTest {
      * Sets area1 to a small value which the standard test case should cover
      */
     @Test
-    void lic10True() {
+    void lic10TestTrue() {
         parameters.setE_PTS(1);
         parameters.setF_PTS(2);
         parameters.setArea1(1);
@@ -239,7 +239,7 @@ class CMVTest {
      * Checks if the method lic11 returns false when all points are ordered by X-coordinates in ascending order.
      */
     @Test
-    void lic11False() {
+    void lic11TestFalse() {
         parameters.setG_PTS(1);
         assertFalse(cmvThreeClosePointsLine.lic11());
     }
@@ -248,7 +248,7 @@ class CMVTest {
      * Checks if lic11 returns true when all points are ordered by X-coordinates in descending order.
      */
     @Test
-    void lic11True() {
+    void lic11TestTrue() {
         parameters.setG_PTS(1);
         assertTrue(cmvEightDistantPoints.lic11());
     }
@@ -257,7 +257,7 @@ class CMVTest {
      * Checks if the method lic13 returns false
      */
     @Test
-    void lic13False() {
+    void lic13TestFalse() {
         parameters.setA_PTS(1);
         parameters.setB_PTS(2);
         parameters.setRadius1(0.1);
@@ -269,7 +269,7 @@ class CMVTest {
      * ....
      */
     @Test
-    void lic13True() {
+    void lic13TestTrue() {
         parameters.setA_PTS(1);
         parameters.setB_PTS(2);
         parameters.setRadius1(0.1);
