@@ -49,17 +49,25 @@ public class CMV {
         return false;
     }
 
-
+    // returns true if there is a pair of three poinst that cant be contained within a circle of radius1
     public boolean lic1(){
         if (numPoints < 3) return false;
         double radius1 = parameters.RADIUS1;
 
         for (int i = 0; i < numPoints-2; i++) {
-            double distance1 = Utils.calculateDistance(points.get(i), points.get(i+1));
-            double distance2 = Utils.calculateDistance(points.get(i), points.get(i+2));
-            double distance3 = Utils.calculateDistance(points.get(i+1), points.get(i+2));
+            double a = Utils.calculateDistance(points.get(i), points.get(i+1));
+            double b = Utils.calculateDistance(points.get(i), points.get(i+2));
+            double c = Utils.calculateDistance(points.get(i+1), points.get(i+2));
+            double radius = Utils.calculateCircumRadius(a, b, c);
+            //the area could be zero if the points lies in a line
+            if (Double.isInfinite(radius)) {
+                double max1 = Math.max(a, b);
+                double max2 = Math.max(max1, c);
+                if (max2 > radius1) return true;
 
-            if (distance3 > radius1*2 || distance1 > radius1*2 || distance2 > radius1*2) return true;
+            } else if (radius > radius1) {
+                return true;
+            }
         }
         return false;
     }

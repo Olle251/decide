@@ -33,4 +33,13 @@ class UtilsTest {
 
         assertEquals(Utils.calculateAngle(a, b, c), (3.0*Math.PI)/4.0);
     }
+
+    @Test
+    void calculateCircumCircleTest() {
+        double a = 2;
+        double b = 2;
+        double c = 2;
+
+        assertEquals(Utils.calculateCircumRadius(a, b, c), (2/Math.sqrt(3)));
+    }
 }
