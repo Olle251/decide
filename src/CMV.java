@@ -221,6 +221,30 @@ public class CMV {
         return false;
     }
 
+    public boolean lic10() {
+        if (numPoints < 5 || 1 > parameters.E_PTS || 1 > parameters.F_PTS || (parameters.E_PTS + parameters.F_PTS) >= (numPoints-3)) return false;
+        Point2D.Double p1;
+        Point2D.Double p2;
+        Point2D.Double p3;
+        int e_pts = parameters.E_PTS;
+        int f_pts = parameters.F_PTS;
+        double area1 = parameters.getArea1();
+
+        for (int i = 0; i < numPoints-(2+e_pts+f_pts); i++) {
+            p1 = points.get(i);
+            p2 = points.get(i+1+e_pts);
+            p3 = points.get(i+2+e_pts+f_pts);
+
+
+            double area = Utils.calculateTriangleArea(p1, p2, p3);
+            //the area could be zero if the points lies in a line
+            if (area > area1){
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Checks if there exists a set of two data points, (X[i],Y[i]) and (X[j],Y[j]), separated by
      * exactly G_PTS consecutive intervening points, such that X[j] - X[i] < 0. (where i < j ).

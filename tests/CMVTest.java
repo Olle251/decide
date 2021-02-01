@@ -166,6 +166,37 @@ class CMVTest {
     }
 
     /**
+     * Sets area1 to a large value which no points in the standard test cases can cover.
+     */
+
+    @Test
+    void lic10False() {
+        parameters.setE_PTS(1);
+        parameters.setF_PTS(2);
+        parameters.setArea1(10000);
+        assertFalse(cmvEightDistantPoints.lic10());
+    }
+    /**
+     * Sets E_pts to a negative value which should cause method to return false
+     */
+    @Test
+    void lic10False2() {
+        parameters.setE_PTS(-1);
+        parameters.setF_PTS(2);
+        parameters.setArea1(1);
+        assertFalse(cmvEightDistantPoints.lic10());
+    }
+    /**
+     * Sets area1 to a small value which the standard test case should cover
+     */
+    @Test
+    void lic10True() {
+        parameters.setE_PTS(1);
+        parameters.setF_PTS(2);
+        parameters.setArea1(1);
+        assertTrue(cmvEightDistantPoints.lic10());
+    }
+    /**
      * Checks if the method lic11 returns false when all points are ordered by X-coordinates in ascending order.
      */
     @Test
