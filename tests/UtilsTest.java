@@ -41,7 +41,7 @@ class UtilsTest {
         Point2D.Double b = new Point2D.Double(4.0, 2.0);
         Point2D.Double c = new Point2D.Double(5.0, -2.0);
 
-        assertEquals(8.0, Utils.calculateTriangleArea(a, b, c));
+        assertEquals(Utils.calculateTriangleArea(a, b, c), 8.0);
 
     }
 }
