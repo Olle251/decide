@@ -111,6 +111,49 @@ public class CMV {
         return false;
     }
 
+    /**
+     * Checks if there are at least q_points consecutive data points in quads or more quadrants.
+     * @return true/false
+     */
+
+    public boolean lic4 () {
+        int qPoints = parameters.getQ_PTS();
+        int quads = parameters.getQUADS();
+
+        List<Integer> visitedQuadrants;
+
+        for (int i = 0; i < numPoints - qPoints - 1; i++) {
+            visitedQuadrants = Arrays.asList(0,0,0,0);
+
+            for(int j = 0; j < qPoints; j++) {
+                if(points.get(i+j).getX() >= 0) {
+                    if(points.get(i+j).getY() >= 0) {
+                        visitedQuadrants.set(0, 1);
+                    }
+                    else {
+                        visitedQuadrants.set(3,1);
+                    }
+                }
+                else {
+                    if(points.get(i+j).getY() >= 0) {
+                        visitedQuadrants.set(1,1);
+                    }
+                    else {
+                        visitedQuadrants.set(2,1);
+                    }
+                }
+            }
+            int sum = 0;
+            for (Integer num : visitedQuadrants) {
+                sum = sum + num;
+                System.out.print(sum + " ");
+            }
+            if (sum >= quads) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public boolean lic5 () {
         Point2D.Double p1;

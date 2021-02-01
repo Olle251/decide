@@ -108,6 +108,20 @@ class CMVTest {
         parameters.setArea1(0.1);
         assertFalse(cmvThreeClosePointsAscending.lic3());
     }
+
+
+    @Test
+    void lic4TestTruue() {
+        parameters.setQUADS(1);
+        parameters.setQ_PTS(5);
+        assertTrue(cmvEightDistantPoints.lic4());
+    }
+
+    @Test
+    void lic4TestFalse() {
+        parameters.setQ_PTS(5);
+        parameters.setQUADS(2);
+    }
     /** Checks if the method lic5 returns true when there exists a pair of consecutive points (p1, p2) where
      * p1's X-coordinate > p2's X-coordinate.
      */
