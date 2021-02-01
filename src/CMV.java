@@ -265,6 +265,31 @@ public class CMV {
         return false;
     }
 
+    /**
+     * Checks if both lic7 holds, and if there exists at least one set of two data points separated by exactly K PTS
+     * consecutive intervening points, that are a distance less than the length, LENGTH2, apart.
+     * @return boolean value
+     */
+    public boolean lic12() {
+        if ( (!lic7()) || (numPoints < 3) ) {
+            return false;
+        }
+        double dist;
+        Point2D.Double point1;
+        Point2D.Double point2;
+        double length2 = parameters.getLength2();
+        int K_PTS = parameters.getK_PTS();
+        for (int i = 0 ; i < (numPoints - (1+K_PTS)) ; i++) {
+            point1 = points.get(i);
+            point2 = points.get(i+1+K_PTS);
+            dist = Utils.calculateDistance(point1, point2);
+            if (dist < length2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean lic13 () {
         if (!lic8() || parameters.RADIUS2 < 0) return false;
         Point2D.Double p1;

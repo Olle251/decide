@@ -215,6 +215,33 @@ class CMVTest {
     }
 
     /**
+     * Checks if lic12 returns false when either length1 is greater or length2 is shorter than the distance between
+     * any set of two points separated by exactly K_PTS consecutive intervening.
+     */
+    @Test
+    void lic12False() {
+        parameters.setK_PTS(1);
+        parameters.setLength1(1.0);
+        parameters.setLength2(1.0);
+        assertFalse(cmvThreeClosePointsLine.lic12());
+        parameters.setLength1(5.0);
+        parameters.setLength2(5.0);
+        assertFalse(cmvThreeClosePointsLine.lic12());
+    }
+
+    /**
+     * Checks if lic12 returns true when length1 is less than and length2 is greater than at least one set of two
+     * points separated by exactly K_PTS consecutive intervening.
+     */
+    @Test
+    void lic12True() {
+        parameters.setK_PTS(1);
+        parameters.setLength1(3.0);
+        parameters.setLength2(5.0);
+        assertTrue(cmvThreeClosePointsLine.lic12());
+    }
+
+    /**
      * Checks if the method lic13 returns false
      */
     @Test
