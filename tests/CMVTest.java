@@ -4,6 +4,8 @@ import java.awt.geom.Point2D;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,8 +36,12 @@ class CMVTest {
     void tearDown() {
     }
 
+    //Temporary test for the get method. TODO: Change this test
     @Test
     void getCMV() {
+        parameters.setLength1(2.0);
+        ArrayList<Boolean> cmvList = cmvThreeClosePointsLine.getCMV();
+        assertEquals(cmvList, new ArrayList<Boolean>());
     }
 
     @Test
