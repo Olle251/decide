@@ -36,12 +36,39 @@ class CMVTest {
     void tearDown() {
     }
 
-    //Temporary test for the get method. TODO: Change this test
+    //Checks if all elements in the vector are true, when all lics are fulfilled.
     @Test
     void getCMV() {
-        parameters.setLength1(2.0);
-        ArrayList<Boolean> cmvList = cmvThreeClosePointsLine.getCMV();
-        assertEquals(cmvList, new ArrayList<Boolean>());
+        parameters.setLength1(1.0);
+        parameters.setRadius1(1);
+        parameters.setEpsilon(0.0);
+        parameters.setArea1(1.0);
+        parameters.setDIST(1);
+        parameters.setN_PTS(3);
+        parameters.setK_PTS(1);
+        parameters.setA_PTS(1);
+        parameters.setB_PTS(2);
+        parameters.setC_PTS(1);
+        parameters.setD_PTS(2);
+        parameters.setE_PTS(1);
+        parameters.setF_PTS(2);
+        parameters.setG_PTS(1);
+        parameters.setLength2(10.0);
+        parameters.setRadius2(500);
+        parameters.setArea2(10000);
+        List<Point2D.Double> eightDistantPoints;
+        int numPoints1;
+        eightDistantPoints = Arrays.asList(new Point2D.Double(7.0,20.0), new Point2D.Double(9.0,25.0),
+                new Point2D.Double(6.0,20.0), new Point2D.Double(15.0,21.0),new Point2D.Double(14.0,28.0),
+                new Point2D.Double(25.0,32.0), new Point2D.Double(30.0,34.0), new Point2D.Double(35.0,45.0));
+        numPoints1 = eightDistantPoints.size();
+        CMV cmv = new CMV(eightDistantPoints, numPoints1, parameters);
+        ArrayList<Boolean> cmvList = cmv.getCMV();
+        ArrayList<Boolean> testList = new ArrayList();
+        for ( int i = 0; i < 15; i++) {
+            testList.add(true);
+        }
+        assertEquals(cmvList, testList);
     }
 
     @Test

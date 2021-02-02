@@ -36,6 +36,21 @@ public class CMV {
      */
     private ArrayList<Boolean> createCMV(){
         ArrayList<Boolean> cmvList = new ArrayList();
+        cmvList.add(lic0());
+        cmvList.add(lic1());
+        cmvList.add(lic2());
+        cmvList.add(lic3());
+        cmvList.add(lic4());
+        cmvList.add(lic5());
+        cmvList.add(lic6());
+        cmvList.add(lic7());
+        cmvList.add(lic8());
+        cmvList.add(lic9());
+        cmvList.add(lic10());
+        cmvList.add(lic11());
+        cmvList.add(lic12());
+        cmvList.add(lic13());
+        cmvList.add(lic14());
         return cmvList;
     }
 
