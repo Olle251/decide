@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.List;
 
 public class CMV {
-    private boolean[] vector;
+    private ArrayList<Boolean> cmvList;
     private List<Point2D.Double> points;
     private int numPoints;
     private Parameters parameters;
@@ -20,16 +20,23 @@ public class CMV {
         this.points = points;
         this.numPoints = numPoints;
         this.parameters = parameters;
-
-        vector = createCMV();
+        this.cmvList = createCMV();
     }
 
-    public boolean[] getCMV(){
-        return vector;
+    /**
+     * @return ArrayList with booleans
+     */
+    public ArrayList<Boolean> getCMV(){
+        return cmvList;
     }
-    public boolean[] createCMV(){
-            // call all LICS
-        return null;
+
+    /**
+     * Creates the cmv and runs all lics to add the correct boolean on each index.
+     * @return ArrayList with booleans.
+     */
+    private ArrayList<Boolean> createCMV(){
+        ArrayList<Boolean> cmvList = new ArrayList();
+        return cmvList;
     }
 
     public boolean lic0() {
