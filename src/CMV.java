@@ -14,9 +14,13 @@ public class CMV {
     private Parameters parameters;
 
 
-    //TODO add parameters to constructer
+    /**
+     * Constructor takes inputs and runs all the lics with those inputs to set the CMVList with true and false values
+     * @param points list of coordinates
+     * @param numPoints number of coordinates
+     * @param parameters parameters
+     */
     public CMV (List<Point2D.Double> points , int numPoints, Parameters parameters){
-
         this.points = points;
         this.numPoints = numPoints;
         this.parameters = parameters;
@@ -54,6 +58,10 @@ public class CMV {
         return cmvList;
     }
 
+    /**
+     * Checks if the distance between two points are greater than length1.
+     * @return true or false
+     */
     public boolean lic0() {
         double dist;
         Point2D.Double point1;
@@ -71,7 +79,11 @@ public class CMV {
         return false;
     }
 
-    // returns true if there is a pair of three poinst that cant be contained within a circle of radius1
+
+    /**
+     * Checks if three consecutive points can be contained within a circle of radius1.
+     * @return true or false
+     */
     public boolean lic1(){
         if (numPoints < 3) return false;
         double radius1 = parameters.RADIUS1;
@@ -94,8 +106,10 @@ public class CMV {
         return false;
     }
 
-
-    //LIC2 Checks if there exists a angle that satisfies the condition between three consecutive coordinates in points, p1,p2,p3, p2 always being vertex.
+    /**
+     * Checks if there exists a angle that satisfies the condition between three consecutive coordinates in points, p1,p2,p3, p2 always being vertex
+     * @return true or false
+     */
     public boolean lic2 () {
         for (int i = 2; i < numPoints; i++) {
             Point2D.Double p3 = points.get(i);
@@ -137,7 +151,6 @@ public class CMV {
      * Checks if there are at least q_points consecutive data points in quads or more quadrants.
      * @return true/false
      */
-
     public boolean lic4 () {
         int qPoints = parameters.getQ_PTS();
         int quads = parameters.getQUADS();
@@ -168,7 +181,6 @@ public class CMV {
             int sum = 0;
             for (Integer num : visitedQuadrants) {
                 sum = sum + num;
-
             }
             if (sum >= quads) {
                 return true;
@@ -177,6 +189,10 @@ public class CMV {
         return false;
     }
 
+    /**
+     * Checks if one set of two consecutive points where x in set2 minus x in set1 is less than zero.
+     * @return true or false
+     */
     public boolean lic5 () {
         Point2D.Double p1;
         Point2D.Double p2;
@@ -230,8 +246,6 @@ public class CMV {
         return false;
     }
 
-
-
     /** Checks if there exists at least one set of two data points separated by exactly K_PTS consecutive intervening
      * points that are a distance greater than the length, LENGTH1, apart.
      * @return boolean that says if lic7 holds or not
@@ -254,6 +268,10 @@ public class CMV {
         return false;
     }
 
+    /**
+     * Checks if three points separated by a_pts and b_pts respectively can not be contained within a circle of radius1
+     * @return true or false
+     */
     public boolean lic8() {
         if (numPoints < 5 || 1 > parameters.A_PTS || 1 > parameters.B_PTS || (parameters.A_PTS + parameters.B_PTS) >= (numPoints-3)) return false;
         Point2D.Double p1;
@@ -392,6 +410,11 @@ public class CMV {
         return false;
     }
 
+    /**
+     * First checks lic8.
+     * Then checks if three points separated by a_pts and b_pts respectively can be contained within a circle of radius2.
+     * @return true or false
+     */
     public boolean lic13 () {
         if (!lic8() || parameters.RADIUS2 < 0) return false;
         Point2D.Double p1;
@@ -421,7 +444,6 @@ public class CMV {
             }
         }
         return false;
-
     }
 
     /**
