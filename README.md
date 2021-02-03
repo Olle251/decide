@@ -34,6 +34,8 @@ All contributors have been part of the process such as code comments, system des
 
 ###### Daniel Grunler
   - LIC 2,4,9,10,14 (Pair Programmed with Lee Badal)
+  - Decide class
+  - FUV class and tests
   - Corresponding tests for LICs
   - Utils methods and corresponding tests
 
